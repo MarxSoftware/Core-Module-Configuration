@@ -33,7 +33,7 @@ public class ClusterDB implements DB, MessageService.MessageListener {
 	public ClusterDB(final DB wrapped_db, final Cluster cluster) {
 		this.wrapped_db = wrapped_db;
 		this.cluster = cluster;
-		this.cluster.getMessageService().registerMessageListener(this);
+		this.cluster.getRAFTMessageService().registerMessageListener(this);
 	}
 	
 
@@ -48,7 +48,7 @@ public class ClusterDB implements DB, MessageService.MessageListener {
 		message.setType(REGISTRY_ADD);
 		message.setPayload(gson.toJson(payload));
 		try {	
-			cluster.getMessageService().publish(message);
+			cluster.getRAFTMessageService().publish(message);
 			
 			return true;
 		} catch (IOException ex) {
@@ -66,7 +66,7 @@ public class ClusterDB implements DB, MessageService.MessageListener {
 		message.setType(REGISTRY_CLEAR);
 		message.setPayload(gson.toJson(payload));
 		try {	
-			cluster.getMessageService().publish(message);
+			cluster.getRAFTMessageService().publish(message);
 		} catch (IOException ex) {
 			LOGGER.error("", ex);
 		}
@@ -86,7 +86,7 @@ public class ClusterDB implements DB, MessageService.MessageListener {
 		message.setType(REGISTRY_DELETE);
 		message.setPayload(gson.toJson(payload));
 		try {	
-			cluster.getMessageService().publish(message);
+			cluster.getRAFTMessageService().publish(message);
 		} catch (IOException ex) {
 			LOGGER.error("", ex);
 		}
@@ -112,7 +112,7 @@ public class ClusterDB implements DB, MessageService.MessageListener {
 	}
 
 	public void close() {
-		this.cluster.getMessageService().unregisterMessageListener(this);
+		this.cluster.getRAFTMessageService().unregisterMessageListener(this);
 	}
 
 	public static class PayloadAdd {
