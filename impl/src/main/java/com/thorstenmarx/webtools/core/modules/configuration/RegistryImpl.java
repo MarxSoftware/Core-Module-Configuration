@@ -26,7 +26,6 @@ package com.thorstenmarx.webtools.core.modules.configuration;
 import com.thorstenmarx.webtools.api.cluster.Cluster;
 import com.thorstenmarx.webtools.api.configuration.Configuration;
 import com.thorstenmarx.webtools.api.configuration.Registry;
-import com.thorstenmarx.webtools.core.modules.configuration.store.ClusterDB;
 import com.thorstenmarx.webtools.core.modules.configuration.store.H2DB;
 import java.io.File;
 
@@ -39,46 +38,24 @@ public class RegistryImpl implements Registry {
 	private final File path;
 	
 	private final H2DB db;
-	private ClusterDB cluster_db;
-	
-	private final Cluster cluster;
 	
 	public RegistryImpl (final File path) {
-		this(path, null);
-	}
-	public RegistryImpl (final File path, final Cluster cluster) {
 		this.path = path;
-		this.cluster = cluster;
 		db = new H2DB(path);
 	}
 	
-	private boolean isCluster () {
-		return cluster != null;
-	}
 	
 	public void open () {
-		db.open();
-		
-		if (isCluster()) {
-			cluster_db = new ClusterDB(db, cluster);
-		}
+		db.open();	
 	}
 	
 	@Override
 	public void close () {
 		db.close();
-		
-		if (isCluster()) {
-			cluster_db.close();
-		}
 	}
 	
 	@Override
 	public Configuration getConfiguration (final String namespace) {
-		if (isCluster()) {
-			return new ConfigurationImpl(namespace, cluster_db);
-		} else {
-			return new ConfigurationImpl(namespace, db);
-		}
+		return new ConfigurationImpl(namespace, db);
 	}
 }

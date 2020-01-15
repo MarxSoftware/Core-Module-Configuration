@@ -40,7 +40,7 @@ public class CoreModuleConfigurationModuleLifeCycle extends ModuleLifeCycleExten
 	
 	@Override
 	public void activate() {
-		registry = new RegistryImpl(configuration.getDataDir(), getCoreContext().getCluster());
+		registry = new RegistryImpl(configuration.getDataDir());
         registry.open();
 		getContext().serviceRegistry().register(Registry.class, registry);
 	}
