@@ -23,7 +23,6 @@ package com.thorstenmarx.webtools.core.modules.configuration;
  * #L%
  */
 
-import com.thorstenmarx.webtools.api.cluster.Cluster;
 import com.thorstenmarx.webtools.api.configuration.Configuration;
 import com.thorstenmarx.webtools.api.configuration.Registry;
 import com.thorstenmarx.webtools.core.modules.configuration.store.H2DB;

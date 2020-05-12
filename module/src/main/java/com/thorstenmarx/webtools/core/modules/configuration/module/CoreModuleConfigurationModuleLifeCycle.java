@@ -17,43 +17,44 @@
  */
 package com.thorstenmarx.webtools.core.modules.configuration.module;
 
-
 import com.thorstenmarx.modules.api.ModuleLifeCycleExtension;
 import com.thorstenmarx.modules.api.annotation.Extension;
 import com.thorstenmarx.webtools.api.CoreModuleContext;
 import com.thorstenmarx.webtools.api.configuration.Registry;
 import com.thorstenmarx.webtools.core.modules.configuration.RegistryImpl;
 
-
 /**
  *
  * @author marx
-*/
+ */
 @Extension(ModuleLifeCycleExtension.class)
 public class CoreModuleConfigurationModuleLifeCycle extends ModuleLifeCycleExtension {
 
 	public static RegistryImpl registry;
-	
-	public CoreModuleContext getCoreContext () {
+
+	public CoreModuleContext getCoreContext() {
 		return (CoreModuleContext) getContext();
 	}
-	
+
 	@Override
 	public void activate() {
-		registry = new RegistryImpl(configuration.getDataDir());
-        registry.open();
-		getContext().serviceRegistry().register(Registry.class, registry);
+		if (registry == null) {
+			registry = new RegistryImpl(configuration.getDataDir());
+			registry.open();
+			getContext().serviceRegistry().register(Registry.class, registry);
+		}
 	}
 
 	@Override
 	public void deactivate() {
 		getContext().serviceRegistry().unregister(Registry.class, registry);
 		registry.close();
+		registry = null;
 	}
 
 	@Override
 	public void init() {
 
 	}
-	
+
 }
