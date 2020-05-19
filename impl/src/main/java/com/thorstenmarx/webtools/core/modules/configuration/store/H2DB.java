@@ -93,6 +93,18 @@ public class H2DB implements DB {
 			throw new RuntimeException(ex);
 		}
 	}
+	
+	public void clearAll () {
+		try (Connection connection = pool.getConnection();
+				PreparedStatement st = connection.prepareStatement("DELETE FROM configuration")) {
+
+			st.execute();
+
+			connection.commit();
+		} catch (SQLException ex) {
+			throw new RuntimeException(ex);
+		}
+	}
 
 	@Override
 	public String get(final String namespace, final String key) {

@@ -31,6 +31,8 @@ public interface DB {
 	boolean add(final String namespace, final String key, final String content);
 
 	void clear(final String namespace);
+	
+	void clearAll();
 
 	int count(final String namespace);
 
