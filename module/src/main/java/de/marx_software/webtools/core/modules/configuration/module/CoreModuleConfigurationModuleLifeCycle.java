@@ -15,13 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.thorstenmarx.webtools.core.modules.configuration.module;
+package de.marx_software.webtools.core.modules.configuration.module;
 
 import com.thorstenmarx.modules.api.ModuleLifeCycleExtension;
 import com.thorstenmarx.modules.api.annotation.Extension;
-import com.thorstenmarx.webtools.api.CoreModuleContext;
-import com.thorstenmarx.webtools.api.configuration.Registry;
-import com.thorstenmarx.webtools.core.modules.configuration.RegistryImpl;
+import de.marx_software.webtools.api.CoreModuleContext;
+import de.marx_software.webtools.api.configuration.Registry;
+import de.marx_software.webtools.core.modules.configuration.RegistryImpl;
 
 /**
  *

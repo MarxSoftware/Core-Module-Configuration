@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.thorstenmarx.webtools.core.modules.configuration.store;
+package de.marx_software.webtools.core.modules.configuration.store;
 
 import com.google.gson.Gson;
-import com.thorstenmarx.webtools.api.cluster.ClusterMessageAdapter;
-import com.thorstenmarx.webtools.api.cluster.ClusterService;
+import de.marx_software.webtools.api.cluster.ClusterMessageAdapter;
+import de.marx_software.webtools.api.cluster.ClusterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
